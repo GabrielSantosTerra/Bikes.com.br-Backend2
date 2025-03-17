@@ -1,22 +1,28 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class UsuariosService {
+export class PessoasService {
   constructor(private prisma: PrismaService) {}
 
   // find a user
   async findOne(email: string): Promise<any> {
-    return this.prisma.usuario.findFirst({
+    return this.prisma.pessoa.findFirst({
       where: { email },
     });
   }
 
   // create a user
-  async create(email: string, senha: string, id_pessoa: number): Promise<void> {
+  async create(
+    nome: string,
+    cpf_cnpj: string,
+    telefone: string,
+    email: string,
+    data_nascimento: string,
+    tipo_pessoa: string,
+  ): Promise<void> {
     // Verifica se o email já existe
-    const emailExists = await this.prisma.usuario.findUnique({
+    const emailExists = await this.prisma.pessoa.findUnique({
       where: { email },
     });
 
@@ -24,15 +30,15 @@ export class UsuariosService {
       throw new ConflictException('Email já está em uso');
     }
 
-    const saltRounds = 10;
-    const hashedSenha = await bcrypt.hash(senha, saltRounds);
-
     // Adiciona o novo usuário
-    await this.prisma.usuario.create({
+    await this.prisma.pessoa.create({
       data: {
+        nome,
+        cpf_cnpj,
+        telefone,
         email,
-        senha: hashedSenha,
-        id_pessoa,
+        data_nascimento,
+        tipo_pessoa,
       },
     });
   }

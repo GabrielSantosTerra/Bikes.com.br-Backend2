@@ -1,5 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsuariosService } from '../usuarios/usuarios.service';
+import { PessoasService } from '../pessoas/pessoas.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -7,13 +12,32 @@ import * as bcrypt from 'bcrypt';
 export class AuthService {
   constructor(
     private usuariosService: UsuariosService,
+    private pessoasService: PessoasService,
     private jwtService: JwtService,
   ) {}
 
   // register a user
-  async signUp(email: string, pass: string): Promise<void> {
-    await this.usuariosService.create(email, pass);
-    return await this.usuariosService.findOne(email);
+  async signUp(
+    nome: string,
+    cpf_cnpj: string,
+    telefone: string,
+    email: string,
+    senha: string,
+    data_nascimento: string,
+    tipo_pessoa: string,
+  ): Promise<void> {
+    await this.pessoasService.create(
+      nome,
+      cpf_cnpj,
+      telefone,
+      email,
+      data_nascimento,
+      tipo_pessoa,
+    );
+    const pessoa = await this.pessoasService.findOne(email);
+    await this.usuariosService.create(email, senha, pessoa.id);
+    await this.usuariosService.findOne(email);
+    return pessoa;
   }
 
   // login a user
@@ -44,12 +68,23 @@ export class AuthService {
   }
 
   // return user data from token
-  async getUsuario(token: string): Promise<{ id: string; email: string }> {
+  async getUsuario(token: string): Promise<{
+    usuario: any;
+    pessoa: any;
+  }> {
     const payload = this.jwtService.verify(token);
+
+    // Obtém os dados do usuário e da pessoa
     const usuario = await this.usuariosService.findOne(payload.email);
+    const pessoa = await this.pessoasService.findOne(payload.email);
+
+    if (!usuario || !pessoa) {
+      throw new NotFoundException('Usuário ou pessoa não encontrados');
+    }
+
     return {
-      id: usuario.id,
-      email: usuario.email,
+      usuario,
+      pessoa,
     };
   }
 
