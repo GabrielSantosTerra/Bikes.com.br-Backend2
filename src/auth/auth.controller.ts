@@ -9,21 +9,21 @@ export class AuthController {
   @HttpCode(HttpStatus.CREATED)
   @Post('register')
   signUp(@Body() signUpDto: Record<string, any>) {
-    return this.authService.signUp(signUpDto.email, signUpDto.password);
+    return this.authService.signUp(signUpDto.email, signUpDto.senha);
   }
 
   // login a user
   @HttpCode(HttpStatus.OK)
   @Post('login')
   signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.signIn(signInDto.email, signInDto.password);
+    return this.authService.signIn(signInDto.email, signInDto.senha);
   }
 
   // return user data from token
   @HttpCode(HttpStatus.OK)
   @Post('me')
-  getUser(@Body() data: Record<string, any>) {
-    return this.authService.getUser(data.access_token);
+  getUsuario(@Body() data: Record<string, any>) {
+    return this.authService.getUsuario(data.access_token);
   }
 
   // logout a user and invalidate the token

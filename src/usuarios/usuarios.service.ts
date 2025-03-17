@@ -3,20 +3,20 @@ import * as bcrypt from 'bcrypt';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class UsersService {
+export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
   // find a user
   async findOne(email: string): Promise<any> {
-    return this.prisma.user.findFirst({
+    return this.prisma.usuario.findFirst({
       where: { email },
     });
   }
 
   // create a user
-  async create(email: string, password: string): Promise<void> {
+  async create(email: string, senha: string): Promise<void> {
     // Verifica se o email já existe
-    const emailExists = await this.prisma.user.findUnique({
+    const emailExists = await this.prisma.usuario.findUnique({
       where: { email },
     });
 
@@ -25,13 +25,13 @@ export class UsersService {
     }
 
     const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedSenha = await bcrypt.hash(senha, saltRounds);
 
     // Adiciona o novo usuário
-    await this.prisma.user.create({
+    await this.prisma.usuario.create({
       data: {
         email,
-        password: hashedPassword,
+        senha: hashedSenha,
       },
     });
   }

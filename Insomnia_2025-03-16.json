@@ -15,7 +15,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"luiz\",\n\t\"password\": \"123\",\n\t\"email\": \"luiz@mail.com\"\n}"
+        "text": "{\n\t\"email\": \"luiz\",\n\t\"senha\": \"123\",\n\t\"email\": \"luiz@mail.com\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -68,7 +68,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"luiz\",\n\t\"password\": \"123\"\n}"
+        "text": "{\n\t\"email\": \"luiz\",\n\t\"senha\": \"123\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -98,7 +98,7 @@
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n\t\"email\": \"john\",\n\t\"password\": \"changeme\"\n}"
+        "text": "{\n\t\"email\": \"john\",\n\t\"senha\": \"changeme\"\n}"
       },
       "parameters": [],
       "headers": [
