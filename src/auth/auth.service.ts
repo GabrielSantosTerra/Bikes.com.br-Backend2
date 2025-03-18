@@ -25,7 +25,10 @@ export class AuthService {
     senha: string,
     data_nascimento: string,
     tipo_pessoa: string,
-  ): Promise<void> {
+  ): Promise<{
+    usuario: any;
+    pessoa: any;
+  }> {
     await this.pessoasService.create(
       nome,
       cpf_cnpj,
@@ -35,9 +38,22 @@ export class AuthService {
       tipo_pessoa,
     );
     const pessoa = await this.pessoasService.findOne(email);
+
+    if (!pessoa) {
+      throw new NotFoundException('Pessoa não encontrada');
+    }
+
     await this.usuariosService.create(email, senha, pessoa.id);
-    await this.usuariosService.findOne(email);
-    return pessoa;
+    const usuario = await this.usuariosService.findOne(email);
+
+    if (!pessoa || !usuario) {
+      throw new NotFoundException('Usuário ou pessoa não encontrados');
+    }
+
+    return {
+      usuario,
+      pessoa,
+    };
   }
 
   // login a user

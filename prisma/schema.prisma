@@ -22,14 +22,16 @@ model Pessoa {
   data_nascimento String
   tipo_pessoa String
 
+  usuario Usuario?
   @@map("pessoas")
 }
 
 model Usuario {
-  id    Int    @id @default(autoincrement())
-  email      String @unique
-  senha   String
-  id_pessoa Int
+  id Int @id @default(autoincrement())
+  email String @unique
+  senha String
+  id_pessoa Int @unique
 
+  pessoa Pessoa @relation(fields: [id_pessoa], references: [id])
   @@map("usuarios")
 }
