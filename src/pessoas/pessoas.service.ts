@@ -15,10 +15,12 @@ export class PessoasService {
   // create a user
   async create(
     nome: string,
+    fantasia: string,
     cpf_cnpj: string,
     telefone: string,
     email: string,
     data_nascimento: string,
+    regime: string,
     tipo_pessoa: string,
   ): Promise<void> {
     // Verifica se o email já existe
@@ -34,10 +36,12 @@ export class PessoasService {
     await this.prisma.pessoa.create({
       data: {
         nome,
+        fantasia,
         cpf_cnpj,
         telefone,
         email,
         data_nascimento,
+        regime,
         tipo_pessoa,
       },
     });

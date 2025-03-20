@@ -19,11 +19,13 @@ export class AuthService {
   // register a user
   async signUp(
     nome: string,
+    fantasia: string,
     cpf_cnpj: string,
     telefone: string,
     email: string,
     senha: string,
     data_nascimento: string,
+    regime: string,
     tipo_pessoa: string,
   ): Promise<{
     usuario: any;
@@ -31,10 +33,12 @@ export class AuthService {
   }> {
     await this.pessoasService.create(
       nome,
+      fantasia,
       cpf_cnpj,
       telefone,
       email,
       data_nascimento,
+      regime,
       tipo_pessoa,
     );
     const pessoa = await this.pessoasService.findOne(email);

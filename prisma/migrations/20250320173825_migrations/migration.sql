@@ -2,10 +2,12 @@
 CREATE TABLE "pessoas" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "nome" TEXT NOT NULL,
+    "fantasia" TEXT,
     "cpf_cnpj" TEXT NOT NULL,
-    "telefone" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "data_nascimento" TEXT NOT NULL,
+    "telefone" TEXT NOT NULL,
+    "data_nascimento" TEXT,
+    "regime" TEXT,
     "tipo_pessoa" TEXT NOT NULL
 );
 

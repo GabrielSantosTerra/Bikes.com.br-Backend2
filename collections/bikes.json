@@ -1,0 +1,87 @@
+{
+  "info": {
+    "_postman_id": "2aae1741-c6ea-46f5-b19e-8b7c16183dd9",
+    "name": "Bikes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "9692cb78-28cc-47d2-8735-1fa5e80b8cf5"
+  },
+  "item": [
+    {
+      "name": "Registrer",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/auth/register",
+          "host": [
+            "http:"
+          ],
+          "path": [
+            "localhost:3000",
+            "auth",
+            "register"
+          ],
+          "query": []
+        },
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\"nome\": \"\",\n\"fantasia\": \"\",\n\"cpf_cnpj\": \"10222333000199\",\n\"telefone\": \"46999061611\",\n\"email\": \"luiz@mail.com\",\n\"senha\": \"12345\",\n\"data_nascimento\": \"1998-10-10\",\n\"regime\" \"\",\n\"tipo_pessoa\": \"J\"\n}"
+        }
+      },
+      "event": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "host": [
+            "http:"
+          ],
+          "path": [
+            "localhost:3000",
+            "auth",
+            "login"
+          ],
+          "query": []
+        },
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": {
+            "email": "luiz@mail.com",
+            "senha": "12345"
+          }
+        }
+      },
+      "event": []
+    },
+    {
+      "name": "Me",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "http://localhost:3000/auth/me",
+          "host": [
+            "http:"
+          ],
+          "path": [
+            "localhost:3000",
+            "auth",
+            "me"
+          ],
+          "query": []
+        },
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": {
+            "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibHVpekBtYWlsLmNvbSIsImlhdCI6MTc0MjQ5MDg0MywiZXhwIjoxNzQyNDk0NDQzfQ.u6Dk14PmkNTumkQ5gJ3DAGdsXSfA3aGnen22ojUylEY"
+          }
+        }
+      },
+      "event": []
+    }
+  ]
+}

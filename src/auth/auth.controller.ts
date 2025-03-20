@@ -10,9 +10,19 @@ export class AuthController {
   @Post('register')
   signUp(@Body() signUpDto: Record<string, any>) {
     //return this.authService.signUp(signUpDto.email, signUpDto.senha);
-    return this.authService.signUp(signUpDto.nome, signUpDto.cpf_cnpj, signUpDto.telefone, signUpDto.email, signUpDto.senha, signUpDto.data_nascimento, signUpDto.tipo_pessoa);
+    return this.authService.signUp(
+      signUpDto.nome,
+      signUpDto.fantasia,
+      signUpDto.cpf_cnpj,
+      signUpDto.telefone,
+      signUpDto.email,
+      signUpDto.senha,
+      signUpDto.data_nascimento,
+      signUpDto.regime,
+      signUpDto.tipo_pessoa,
+    );
   }
- 
+
   // login a user
   @HttpCode(HttpStatus.OK)
   @Post('login')
